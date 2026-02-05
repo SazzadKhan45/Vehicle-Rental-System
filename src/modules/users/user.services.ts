@@ -7,7 +7,7 @@ const getAllUsers = async () => {
   return result;
 };
 
-// Get single user
+// Update single user
 const updateUser = async (id: string, payload: Record<string, unknown>) => {
   const { name, email, phone, role } = payload;
   //
@@ -22,8 +22,21 @@ const updateUser = async (id: string, payload: Record<string, unknown>) => {
   return result;
 };
 
+// Delete single user
+const deleteUser = async (id: string) => {
+  const result = await pool.query(
+    `DELETE FROM users
+       WHERE id = $1
+       `,
+    [id],
+  );
+  //
+  return result;
+};
+
 // Name export
 export const userServices = {
   getAllUsers,
   updateUser,
+  deleteUser,
 };
