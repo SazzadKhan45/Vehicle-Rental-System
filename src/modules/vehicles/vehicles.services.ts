@@ -43,17 +43,22 @@ const getSingleVehicles = async (id: string) => {
   const result = await pool.query(`SELECT * FROM vehicles WHERE id = $1`, [id]);
   return result;
 };
+
+// Delete single vehicle
+const deleteVehicle = async (id: string) => {
+  const result = await pool.query(
+    `DELETE FROM vehicles
+       WHERE id = $1
+       `,
+    [id],
+  );
+  //
+  return result;
+};
 // Name export
 export const vehicleServices = {
   createVehicle,
   getAllVehicles,
   getSingleVehicles,
+  deleteVehicle,
 };
-
-// {
-//   "vehicle_name": "Toyota Camry 2024",
-//   "type": "car",
-//   "registration_number": "ABC-1234",
-//   "daily_rent_price": 50,
-//   "availability_status": "available"
-// }

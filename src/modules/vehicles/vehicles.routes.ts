@@ -18,7 +18,11 @@ router.get("/vehicles/:vehicleId", vehicleController.getSingleVehicles);
 // router.put("/vehicles/:vehicleId");
 
 //Delete Single Vehicles route ++++++++++++++++++++
-// router.delete("/vehicles/:vehicleId");
+router.delete(
+  "/vehicles/:vehicleId",
+  authGuard("admin"),
+  vehicleController.deleteVehicle,
+);
 
 // name export
 export const vehiclesRoutes = router;

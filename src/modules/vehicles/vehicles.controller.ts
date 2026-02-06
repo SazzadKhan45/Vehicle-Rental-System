@@ -53,7 +53,7 @@ const getSingleVehicles = async (req: Request, res: Response) => {
     if (result.rowCount === 0) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Vehicles not found",
       });
     }
 
@@ -71,9 +71,37 @@ const getSingleVehicles = async (req: Request, res: Response) => {
   }
 };
 
+// Delete single vehicle
+const deleteVehicle = async (req: Request, res: Response) => {
+  const { vehicleId } = req.params;
+  try {
+    const result = await vehicleServices.deleteVehicle(vehicleId as string);
+
+    // Not found
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Vehicle not found",
+      });
+    }
+
+    // Success
+    res.status(200).json({
+      success: true,
+      message: "Vehicle deleted successfully",
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 // Name export
 export const vehicleController = {
   createVehicle,
   getAllVehicles,
   getSingleVehicles,
+  deleteVehicle,
 };
