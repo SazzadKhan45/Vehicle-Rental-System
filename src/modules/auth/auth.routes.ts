@@ -5,7 +5,10 @@ import { authController } from "./auth.controller";
 const router = Router();
 
 // Signup User route
-router.post("/auth/signup", authController.createUser);
+router.post("/auth/signup", authController.singUpUser);
+
+// Signin user route
+router.post("/auth/signin", authController.signinUser);
 
 // Name export
 export const authRoutes = router;
