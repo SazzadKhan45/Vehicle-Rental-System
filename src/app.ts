@@ -15,7 +15,7 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   res.status(201).json({
     success: true,
-    message: `Express Server is running on port : ${process.env.PORT}`,
+    message: `Vehicle Rental System is running on port : ${process.env.PORT}`,
   });
 });
 
