@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import initDb from "./config/db";
 import { userRoutes } from "./modules/users/user.routes";
 import { authRoutes } from "./modules/auth/auth.routes";
+import { vehiclesRoutes } from "./modules/vehicles/vehicles.routes";
 
 //
 const app = express();
@@ -25,6 +26,9 @@ app.use("/api/v1", authRoutes);
 
 // Users CURD +++++++++++++++++
 app.use("/api/v1", userRoutes);
+
+// Vehicles CURD +++++++++++++
+app.use("/api/v1", vehiclesRoutes);
 
 // Not Fount Api
 app.use((req: Request, res: Response) => {
