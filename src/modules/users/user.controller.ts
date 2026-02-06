@@ -23,23 +23,23 @@ const getAllUsers = async (req: Request, res: Response) => {
 
 // Update single user +++++++++++++
 const updateUser = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  console.log({ id: userId });
+  const { vehicleId } = req.params;
+
   try {
-    const result = await userServices.updateUser(userId as string, req.body);
+    const result = await userServices.updateUser(vehicleId as string, req.body);
 
     // Not found
     if (result.rows.length === 0) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Vehicle not found",
       });
     }
 
     //
     res.status(200).json({
       success: true,
-      message: "User updated successfully",
+      message: "Vehicle updated successfully",
       data: result.rows[0],
     });
     //

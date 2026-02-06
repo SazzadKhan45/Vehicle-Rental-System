@@ -15,7 +15,11 @@ router.get("/vehicles", vehicleController.getAllVehicles);
 router.get("/vehicles/:vehicleId", vehicleController.getSingleVehicles);
 
 //Update Single Vehicles route ++++++++++++++++++++
-// router.put("/vehicles/:vehicleId");
+router.put(
+  "/vehicles/:vehicleId",
+  authGuard("admin"),
+  vehicleController.updateVehicle,
+);
 
 //Delete Single Vehicles route ++++++++++++++++++++
 router.delete(

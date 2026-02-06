@@ -71,6 +71,39 @@ const getSingleVehicles = async (req: Request, res: Response) => {
   }
 };
 
+// Update single vehicle
+const updateVehicle = async (req: Request, res: Response) => {
+  const { vehicleId } = req.params;
+  console.log({ id: vehicleId });
+  try {
+    const result = await vehicleServices.updateVehicle(
+      vehicleId as string,
+      req.body,
+    );
+
+    // Not found
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    //
+    res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      data: result.rows[0],
+    });
+    //
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 // Delete single vehicle
 const deleteVehicle = async (req: Request, res: Response) => {
   const { vehicleId } = req.params;
@@ -103,5 +136,6 @@ export const vehicleController = {
   createVehicle,
   getAllVehicles,
   getSingleVehicles,
+  updateVehicle,
   deleteVehicle,
 };
